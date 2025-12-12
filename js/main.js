@@ -48,22 +48,24 @@ function mostrarPokemon(poke) {
 }
 
 botonesHeader.forEach(boton => boton.addEventListener("click", (event) => {
-        const botonId = event.currentTarget.id;
-        listaPokemon.innerHTML = "";
+    const botonId = event.currentTarget.id;
 
-        for (let i = 1; i <= 151; i++) {
-            fetch(URL + i)
-                .then((response) => response.json())
-                .then(data => {
+    listaPokemon.innerHTML = "";
 
-        if (botonId === "todos") {
-            mostrarPokemon(data);
-        } else {
-            const tipos = data.types.map(type => type.type.name);
-            if (tipos.some(tipo => tipo.includes(botonId))) {
-                mostrarPokemon(data);
-            }
-        }
-    })
-}
-    }))
+    for (let i = 1; i <= 151; i++) {
+        fetch(URL + i)
+            .then((response) => response.json())
+            .then(data => {
+
+                if (botonId === "ver-todos") {
+                    mostrarPokemon(data);
+                } else {
+                    const tipos = data.types.map(type => type.type.name);
+                    if (tipos.some(tipo => tipo.includes(botonId))) {
+                        mostrarPokemon(data);
+                    }
+                }
+
+            })
+    }
+}))
